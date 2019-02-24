@@ -18,10 +18,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
-import java.util.Properties;
+import java.util.*;
 
 /**
  * User: hexie
@@ -77,8 +74,11 @@ public class MybatisSqlLogInterceptor implements Interceptor {
                 String property = mapping.getProperty();
                 Object param = boundSql.getAdditionalParameter(property);
                 if (param == null) {
+
                     if (parameterObject instanceof MapperMethod.ParamMap) {
                         param = ((MapperMethod.ParamMap) parameterObject).getOrDefault(property, null);
+                    } else if (parameterObject instanceof Map) {
+                        param = ((Map) parameterObject).getOrDefault(property, null);
                     } else {
                         param = parameterObject;
                     }
