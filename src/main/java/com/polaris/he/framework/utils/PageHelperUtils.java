@@ -15,16 +15,19 @@ public class PageHelperUtils {
     public static <T> PageResult<T> getPageInfo(List<?> pageHelperOriginList, PageResult<T> pageResult) {
         int pageNo = 0;
         int pageSize = pageHelperOriginList.size();
+        int totalCount = pageSize;
         int totalPate = 1;
         if (pageHelperOriginList instanceof Page) {
             Page page = (Page) pageHelperOriginList;
             pageNo = page.getPageNum();
             pageSize = page.getPageSize();
             totalPate = page.getPages();
+            totalCount = (int) page.getTotal();
         }
         pageResult.setPageNo(pageNo);
         pageResult.setPageSize(pageSize);
         pageResult.setTotalPage(totalPate);
+        pageResult.setTotalCount(totalCount);
         return pageResult;
     }
 }

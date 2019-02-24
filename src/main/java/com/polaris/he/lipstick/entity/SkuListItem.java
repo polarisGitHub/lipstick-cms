@@ -1,6 +1,5 @@
 package com.polaris.he.lipstick.entity;
 
-import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -26,8 +25,6 @@ public class SkuListItem {
     private String skuName;
 
     private String skuByName;
-
-    private String url;
 
     private String colorNo;
 }

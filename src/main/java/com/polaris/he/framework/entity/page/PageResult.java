@@ -25,4 +25,6 @@ public class PageResult<T> {
     private Integer pageSize;
 
     private Integer totalPage;
+
+    private Integer totalCount;
 }

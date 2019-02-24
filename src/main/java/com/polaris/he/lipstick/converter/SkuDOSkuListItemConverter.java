@@ -23,9 +23,10 @@ public class SkuDOSkuListItemConverter implements Converter<SkuDO, SkuListItem> 
     @Override
     public SkuListItem convert(SkuDO source) {
         SkuListItem sku = new SkuListItem();
-        sku.setBrandCode(source.getSkuCode());
+        sku.setBrandCode(source.getBrandCode());
         sku.setGoodsCode(source.getGoodsCode());
         sku.setSkuCode(source.getSkuCode());
+        sku.setSkuName(source.getSkuName());
         LipstickExtension extension = JsonUtils.toJavaObject(source.getExtension(), LipstickExtension.class);
         sku.setColorNo(Optional.ofNullable(extension).map(LipstickExtension::getColorNo).orElse(""));
         return sku;
