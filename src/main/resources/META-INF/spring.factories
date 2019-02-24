@@ -1,0 +1,2 @@
+org.springframework.boot.env.EnvironmentPostProcessor=\
+com.polaris.he.application.yml.CustomerYmlConfigLoader

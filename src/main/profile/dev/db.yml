@@ -1,0 +1,15 @@
+c3p0:
+  driverClass: com.mysql.cj.jdbc.Driver
+  url: jdbc:mysql://127.0.0.1:3307/lipstick?useUnicode=true&characterEncoding=utf-8&useSSL=false&serverTimezone=Asia/Shanghai&allowPublicKeyRetrieval=true
+  username: polaris_he
+  password: 123456
+  minPoolSize: 2
+  maxPoolSize: 10
+  initialPoolSize: 5
+  maxIdleTime: 5000
+  checkoutTimeout: 5000
+  maxStatements: 20
+
+mybatis:
+  mapperLocations: mapper/*.xml,mapper/**/*.xml
+  typeHandlersPackage: com.polaris.he.framework.dao.handler

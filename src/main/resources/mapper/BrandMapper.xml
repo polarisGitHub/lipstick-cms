@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.he.framework.dao.BrandDao">
+
+    <select id="getAll" resultType="com.polaris.he.framework.dao.object.BrandDO">
+        select code as code,name as name
+        from brand
+        where type=#{type,jdbcType=VARCHAR}
+    </select>
+
+    <select id="getByCode" resultType="com.polaris.he.framework.dao.object.BrandDO">
+        select code as code,name as name
+        from brand
+        where type=#{type,jdbcType=VARCHAR} and code=#{code,jdbcType=VARCHAR}
+    </select>
+</mapper>

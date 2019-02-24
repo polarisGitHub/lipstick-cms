@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.he.framework.dao.GoodsDao">
+
+    <insert id="insert" parameterType="com.polaris.he.framework.dao.object.GoodsDO">
+        insert goods (
+          type,
+          brand_code,
+          goods_code,
+          goods_name,
+          illustration,
+          url,
+          created_date,
+          modified_date
+        ) values
+        <foreach collection="collection" item="item" separator=",">
+            (
+                #{item.type,jdbcType=VARCHAR},
+                #{item.brandCode,jdbcType=VARCHAR},
+                #{item.goodsCode,jdbcType=VARCHAR},
+                #{item.goodsName,jdbcType=VARCHAR},
+                #{item.illustration,jdbcType=VARCHAR},
+                #{item.url,jdbcType=VARCHAR},
+                now(),
+                now()
+            )
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.polaris.he.framework.dao.object.GoodsDO">
+        update goods
+        <set>
+            <if test="type != null">
+                type=#{type,jdbcType=VARCHAR},
+            </if>
+            <if test="brandCode != null">
+                brand_code=#{brandCode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsName != null">
+                goods_name=#{goodsName,jdbcType=VARCHAR},
+            </if>
+            <if test="illustration != null">
+                illustration=#{illustration,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url=#{url,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            goods_code=#{goodsCode,jdbcType=VARCHAR} and type=#{type,jdbcType=VARCHAR}
+        </where>
+    </update>
+
+    <select id="getByCodeList" resultType="com.polaris.he.framework.dao.object.GoodsDO">
+        select
+            type as type,
+            brand_code as brandCode,
+            goods_code as goodsCode,
+            goods_name as goodsName,
+            illustration as illustration,
+            url as url
+        from goods
+        where type=#{type,jdbcType=VARCHAR} and goods_code in
+        <foreach collection="collection" item="item" separator="," open="(" close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </select>
+
+    <select id="getByCode" resultType="com.polaris.he.framework.dao.object.GoodsDO">
+        select
+            type as type,
+            brand_code as brandCode,
+            goods_code as goodsCode,
+            goods_name as goodsName,
+            illustration as illustration,
+            url as url
+        from goods
+        where brand_code=#{brandCode,jdbcType=VARCHAR} and type=#{type,jdbcType=VARCHAR} and goods_code=#{goodsCode,jdbcType=VARCHAR}
+    </select>
+</mapper>

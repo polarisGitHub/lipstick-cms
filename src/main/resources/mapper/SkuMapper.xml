@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.he.framework.dao.SkuDao">
+
+    <insert id="insert" parameterType="com.polaris.he.framework.dao.object.SkuDO">
+        insert sku (
+        type,
+        brand_code,
+        goods_code,
+        sku_code,
+        sku_name,
+        sku_by_name,
+        url,
+        extension,
+        created_date,
+        modified_date
+        ) values
+        <foreach collection="collection" item="item" separator=",">
+            (
+            #{item.type,jdbcType=VARCHAR},
+            #{item.brandCode,jdbcType=VARCHAR},
+            #{item.goodsCode,jdbcType=VARCHAR},
+            #{item.skuCode,jdbcType=VARCHAR},
+            #{item.skuName,jdbcType=VARCHAR},
+            #{item.skuByName,jdbcType=VARCHAR},
+            #{item.url,jdbcType=VARCHAR},
+            #{item.extension,jdbcType=VARCHAR},
+            now(),
+            now()
+            )
+        </foreach>
+    </insert>
+
+    <update id="update" parameterType="com.polaris.he.framework.dao.object.SkuDO">
+        update sku
+        <set>
+            <if test="brandCode != null">
+                brand_code=#{brandCode,jdbcType=VARCHAR},
+            </if>
+            <if test="goodsCode != null">
+                goods_code=#{goodsCode,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                sku_name=#{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuByName != null">
+                sku_by_name=#{skuByName,jdbcType=VARCHAR},
+            </if>
+            <if test="url != null">
+                url=#{url,jdbcType=VARCHAR},
+            </if>
+            <if test="extension != null">
+                extension=#{extension,jdbcType=VARCHAR},
+            </if>
+        </set>
+        <where>
+            brand_code=#{brandCode,jdbcType=VARCHAR} and type=#{type,jdbcType=VARCHAR} and
+            sku_code=#{skuCode,jdbcType=VARCHAR}
+        </where>
+    </update>
+
+    <select id="query" parameterType="com.polaris.he.framework.dao.object.SkuQueryDO"
+            resultType="com.polaris.he.framework.dao.object.SkuDO">
+        select
+            id as id,
+            brand_code as brandCode,
+            goods_code as goodsCode,
+            sku_code as skuCode,
+            sku_name as skuName,
+            sku_by_name as skuByName,
+            url as url,
+            extension as extension
+        from sku
+        <where>
+            type=#{type,jdbcType=VARCHAR}
+            <if test="skuName != null">
+                and sku_name=#{skuName,jdbcType=VARCHAR},
+            </if>
+            <if test="skuName != null">
+                and sku_name=#{skuName,jdbcType=VARCHAR},
+            </if>
+        </where>
+    </select>
+</mapper>

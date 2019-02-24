@@ -1,10 +1,10 @@
 package com.polaris.he.framework.service;
 
-import com.polaris.he.framework.entity.Sku;
+import com.polaris.he.lipstick.entity.SkuListItem;
+import com.polaris.he.framework.entity.page.PageResult;
 import com.polaris.he.framework.entity.query.SkuListQueryEntity;
 
 import java.util.Collection;
-import java.util.List;
 
 /**
  * User: hexie
@@ -17,22 +17,22 @@ public interface SkuManagerService {
     /**
      * @return
      */
-    List<Sku> query(SkuListQueryEntity query);
+    PageResult<?> query(SkuListQueryEntity query);
 
     /**
      * @param id
      * @return
      */
-    Sku getById(Long id);
+    Object getById(Long id);
 
     /**
      * @param sku
      */
-    void save(Sku sku);
+    void save(SkuListItem sku);
 
 
     /**
      * @param collection
      */
-    void importer(Collection<Sku> collection);
+    void importer(Collection<SkuListItem> collection);
 }

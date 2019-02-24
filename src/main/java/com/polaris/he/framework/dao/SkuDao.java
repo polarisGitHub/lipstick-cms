@@ -1,11 +1,10 @@
 package com.polaris.he.framework.dao;
 
 import com.polaris.he.framework.dao.object.SkuDO;
-import org.apache.ibatis.annotations.Param;
+import com.polaris.he.framework.dao.object.SkuQueryDO;
 
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 /**
  * User: hexie
@@ -14,6 +13,11 @@ import java.util.Set;
  */
 public interface SkuDao extends Dao {
 
+
+    /**
+     * @return
+     */
+    List<SkuDO> query(SkuQueryDO queryDO);
 
     /**
      * @param l
@@ -27,18 +31,5 @@ public interface SkuDao extends Dao {
      */
     int insert(Collection<SkuDO> insert);
 
-    /**
-     * @param type
-     * @param skuCodes
-     * @return
-     */
-    List<SkuDO> getByCodeList(@Param("type") String type, @Param("collection") Set<String> skuCodes);
-
-    /**
-     * @param type
-     * @param brandCode
-     * @return
-     */
-    SkuDO getSku(@Param("brandCode") String brandCode, @Param("type") String type, @Param("skuCode") String skuCode);
 
 }

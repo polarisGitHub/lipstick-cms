@@ -1,0 +1,10 @@
+user:
+  info:
+    service: mockUserInfoServiceImpl
+
+
+encryption:
+  aes:
+    password:
+      data: SIEGe0K4$XuceFy%
+      jwt: Bten&eh9E5RrMQCE

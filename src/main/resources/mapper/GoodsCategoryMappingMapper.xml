@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.he.framework.dao.GoodsCategoryMappingDao">
+
+    <insert id="insert" parameterType="com.polaris.he.framework.dao.object.GoodsCategoryMappingDO">
+        insert goods_category_mapping (
+          type,
+          category_code,
+          goods_code
+        ) values
+        <foreach collection="collection" item="item" separator=",">
+            (
+              #{item.type,jdbcType=VARCHAR},
+              #{item.categoryCode,jdbcType=VARCHAR},
+              #{item.goodsCode,jdbcType=VARCHAR}
+            )
+        </foreach>
+    </insert>
+
+    <delete id="deleteByGoodsCode">
+        delete from goods_category_mapping
+        where type=#{type,jdbcType=VARCHAR} and goods_code in
+        <foreach collection="collection" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+    </delete>
+</mapper>

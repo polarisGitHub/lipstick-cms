@@ -1,4 +1,4 @@
-package com.polaris.he.framework.entity;
+package com.polaris.he.lipstick.entity;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import lombok.Getter;
@@ -13,13 +13,11 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString(callSuper = true)
-public class Sku {
+public class SkuListItem {
 
     private Long id;
 
     private String brandCode;
-
-    transient private String type;
 
     private String skuCode;
 
@@ -31,5 +29,5 @@ public class Sku {
 
     private String url;
 
-    private JsonNode extension;
+    private String colorNo;
 }

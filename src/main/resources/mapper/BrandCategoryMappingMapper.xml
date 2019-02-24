@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.polaris.he.framework.dao.BrandCategoryMappingDao">
+
+    <resultMap id="BaseResultMap" type="com.polaris.he.framework.dao.object.BrandCategoryMappingDO">
+        <id column="id" property="id" jdbcType="BIGINT"/>
+        <result column="brand_code" property="brandCode" jdbcType="VARCHAR"/>
+        <result column="category_code" property="categoryCode" jdbcType="VARCHAR"/>
+        <association property="brand" javaType="com.polaris.he.framework.dao.object.BrandDO">
+            <id column="brand_id" property="id" jdbcType="BIGINT"/>
+            <result column="brand_code" property="code" jdbcType="VARCHAR"/>
+            <result column="brand_name" property="name" jdbcType="VARCHAR"/>
+        </association>
+        <association property="category" javaType="com.polaris.he.framework.dao.object.CategoryDO">
+            <id column="category_id" property="id" jdbcType="BIGINT"/>
+            <result column="category_code" property="code" jdbcType="VARCHAR"/>
+            <result column="category_name" property="name" jdbcType="VARCHAR"/>
+        </association>
+    </resultMap>
+
+    <select id="getCategoryByBrands" resultMap="BaseResultMap">
+        select
+        a.id as brand_id,a.code as brand_code,a.name as brand_name,
+        b.id as id,
+        c.id as category_id,c.code as category_code,c.name as category_name
+        from brand a
+        join brand_category_mapping b on a.code=b.brand_code
+        join category c on b.category_code=c.code
+        where
+        b.type=#{type,jdbcType=VARCHAR} and
+        a.code in
+        <foreach collection="brands" item="item" open="(" separator="," close=")">
+            #{item,jdbcType=VARCHAR}
+        </foreach>
+        order by id
+    </select>
+</mapper>
