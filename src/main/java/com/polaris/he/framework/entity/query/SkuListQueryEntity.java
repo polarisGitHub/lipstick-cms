@@ -17,6 +17,8 @@ public class SkuListQueryEntity extends Page {
 
     private String type;
 
+    private String brandCode;
+
     private String skuCode;
 
     private String skuName;

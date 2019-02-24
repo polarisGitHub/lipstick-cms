@@ -73,11 +73,14 @@
         from sku
         <where>
             type=#{type,jdbcType=VARCHAR}
-            <if test="skuName != null">
-                and sku_name=#{skuName,jdbcType=VARCHAR},
+            <if test="brandCode != null">
+                and brand_code=#{brandCode,jdbcType=VARCHAR}
+            </if>
+            <if test="skuCode != null">
+                and sku_code=#{skuCode,jdbcType=VARCHAR}
             </if>
             <if test="skuName != null">
-                and sku_name=#{skuName,jdbcType=VARCHAR},
+                and sku_name like concat('%',#{skuName,jdbcType=VARCHAR},'%')
             </if>
         </where>
     </select>

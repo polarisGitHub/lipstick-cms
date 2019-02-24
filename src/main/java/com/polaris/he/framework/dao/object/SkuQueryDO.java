@@ -16,6 +16,8 @@ public class SkuQueryDO {
 
     private String type;
 
+    private String brandCode;
+
     private String skuCode;
 
     private String skuName;
