@@ -31,8 +31,9 @@ public class SkuManagerController {
     }
 
     @GetMapping("/detail/{id}")
-    public String detail(@PathVariable Long id) {
-        return null;
+    public Object detail(@PathVariable CosmeticsEnum type, @PathVariable Long id) {
+        log.info("查询sku详情，id={},type={}", id, type);
+        return skuManagerService.getById(type.getCode(), id);
     }
 
     @PutMapping("/save")

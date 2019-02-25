@@ -40,14 +40,19 @@ public class SkuManagerServiceImpl implements SkuManagerService {
         log.info("查询sku列表，query={}", query);
         PageHelper.startPage(query.getPageNo(), query.getPageSize());
         List<SkuDO> list = skuDao.query(BeanCopyUtils.copyObject(query, new SkuQueryDO()));
+        log.info("查询sku列表结果，list={}", list);
         Converter<SkuDO, ?> converter = frameworkBizConverterRepository.getConverter(query.getType(), SkuDO.class, "skuListItem");
         List<?> convertList = list.stream().map(converter::convert).collect(Collectors.toList());
         return PageHelperUtils.getPageInfo(list, new PageResult<>(convertList));
     }
 
     @Override
-    public SkuListItem getById(Long id) {
-        return null;
+    public Object getById(String type, Long id) {
+        log.info("查询sku详情，id={}", id);
+        SkuDO sku = skuDao.getById(id);
+        log.info("查询sku结果，data={}", sku);
+        Converter<SkuDO, ?> converter = frameworkBizConverterRepository.getConverter(type, SkuDO.class, "skuDetailItem");
+        return converter.convert(sku);
     }
 
     @Override

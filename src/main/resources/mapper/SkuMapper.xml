@@ -84,4 +84,18 @@
             </if>
         </where>
     </select>
+
+    <select id="getById" parameterType="java.lang.Long" resultType="com.polaris.he.framework.dao.object.SkuDO">
+        select
+            id as id,
+            brand_code as brandCode,
+            goods_code as goodsCode,
+            sku_code as skuCode,
+            sku_name as skuName,
+            sku_by_name as skuByName,
+            url as url,
+            extension as extension
+        from sku
+        where id=#{id,jdbcType=BIGINT}
+    </select>
 </mapper>

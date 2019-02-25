@@ -20,10 +20,11 @@ public interface SkuManagerService {
     PageResult<?> query(SkuListQueryEntity query);
 
     /**
+     * @param type
      * @param id
      * @return
      */
-    Object getById(Long id);
+    Object getById(String type, Long id);
 
     /**
      * @param sku

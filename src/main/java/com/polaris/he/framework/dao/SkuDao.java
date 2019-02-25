@@ -20,6 +20,12 @@ public interface SkuDao extends Dao {
     List<SkuDO> query(SkuQueryDO queryDO);
 
     /**
+     * @param id
+     * @return
+     */
+    SkuDO getById(Long id);
+
+    /**
      * @param l
      * @return
      */
