@@ -8,3 +8,6 @@ encryption:
     password:
       data: SIEGe0K4$XuceFy%
       jwt: Bten&eh9E5RrMQCE
+
+upload:
+  path: /Users/hexie/PycharmProjects/lipstick_spider/img/
