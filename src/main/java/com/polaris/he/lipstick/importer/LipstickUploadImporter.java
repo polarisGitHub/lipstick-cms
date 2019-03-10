@@ -144,6 +144,6 @@ public class LipstickUploadImporter extends AbstractUploadImporter<LipstickUploa
         });
         goodsService.saveGoodsCategoriesMapping(mappings);
         goodsService.save(goodsList);
-        skuService.importer(skuList);
+//        skuService.importer(skuList);
     }
 }

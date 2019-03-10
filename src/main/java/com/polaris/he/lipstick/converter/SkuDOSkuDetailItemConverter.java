@@ -30,11 +30,11 @@ public class SkuDOSkuDetailItemConverter implements Converter<SkuDO, SkuDetailIt
         sku.setSkuName(source.getSkuName());
         sku.setUrl(source.getUrl());
         LipstickExtension extension = JsonUtils.toJavaObject(source.getExtension(), LipstickExtension.class);
-        sku.setColorNo(Optional.ofNullable(extension).map(LipstickExtension::getColorNo).orElse(""));
-        sku.setImgs(extension.getImgs());
-        sku.setFigure(extension.getFigure());
-        sku.setColor(extension.getColor());
-        sku.setColor1(extension.getColor1());
+        sku.setColorNo(Optional.ofNullable(extension).map(LipstickExtension::getColorNo).orElse(null));
+        sku.setImgs(Optional.ofNullable(extension).map(LipstickExtension::getImgs).orElse(null));
+        sku.setFigure(Optional.ofNullable(extension).map(LipstickExtension::getFigure).orElse(null));
+        sku.setColor(Optional.ofNullable(extension).map(LipstickExtension::getColor).orElse(null));
+        sku.setColor1(Optional.ofNullable(extension).map(LipstickExtension::getColor1).orElse(null));
         return sku;
     }
 }

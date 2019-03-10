@@ -1,5 +1,7 @@
 package com.polaris.he.framework.service;
 
+import com.fasterxml.jackson.databind.JsonNode;
+import com.polaris.he.lipstick.entity.SkuDetailItem;
 import com.polaris.he.lipstick.entity.SkuListItem;
 import com.polaris.he.framework.entity.page.PageResult;
 import com.polaris.he.framework.entity.query.SkuListQueryEntity;
@@ -27,13 +29,14 @@ public interface SkuManagerService {
     Object getById(String type, Long id);
 
     /**
+     * @param type
      * @param sku
      */
-    void save(SkuListItem sku);
-
+    void save(String type, JsonNode sku);
 
     /**
+     * @param type
      * @param collection
      */
-    void importer(Collection<SkuListItem> collection);
+    void importer(String type, Collection<SkuListItem> collection);
 }

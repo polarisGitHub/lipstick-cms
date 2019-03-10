@@ -1,5 +1,6 @@
 package com.polaris.he.framework.service.impl;
 
+import com.fasterxml.jackson.databind.JsonNode;
 import com.github.pagehelper.PageHelper;
 import com.polaris.he.framework.dao.SkuDao;
 import com.polaris.he.framework.dao.object.SkuDO;
@@ -16,8 +17,7 @@ import org.springframework.core.convert.converter.Converter;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 /**
@@ -56,12 +56,29 @@ public class SkuManagerServiceImpl implements SkuManagerService {
     }
 
     @Override
-    public void save(SkuListItem sku) {
+    public void save(String type, JsonNode sku) {
+        log.info("保存sku，data={}", sku);
+        Long id = Optional.ofNullable(sku.get("id")).map(JsonNode::numberValue).map(Number::longValue).orElse(null);
+        Converter<JsonNode, SkuDO> converter = frameworkBizConverterRepository.getConverter(type, JsonNode.class, "skuDetailSave");
+        SkuDO skuDo = converter.convert(sku);
+        skuDo.setType(type);
+        if (id == null) {
+            insert(skuDo);
+        } else {
+            update(skuDo);
+        }
+    }
 
+    private void insert(SkuDO skuDo) {
+        skuDao.insert(Collections.singletonList(skuDo));
+    }
+
+    private void update(SkuDO skuDo) {
+        skuDao.update(skuDo);
     }
 
     @Override
-    public void importer(Collection<SkuListItem> collection) {
+    public void importer(String type, Collection<SkuListItem> collection) {
 
     }
 }

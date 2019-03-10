@@ -52,8 +52,8 @@ public class FrameworkBizConverterRepository implements ApplicationContextAware 
     }
 
     @SuppressWarnings("unchecked")
-    public <T> Converter<T, ?> getConverter(String type, Class<T> clazz, String biz) {
-        Converter<T, ?> converter = (Converter<T, ?>) TABLE.get(type, bizKey(clazz, biz));
+    public <T, R> Converter<T, R> getConverter(String type, Class<T> clazz, String biz) {
+        Converter<T, R> converter = (Converter<T, R>) TABLE.get(type, bizKey(clazz, biz));
         Assert.notNull(converter, "convert为空");
         return converter;
     }
